@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>Mongo database</title>
+		<script>
+		window.addEventListener("load",function(){
+			var input;
+			var client = new WebSocket("ws://185.212.129.147:8080");
+			client.onmessage = function(msg){
+				document.getElementById("data").innerHTML = msg.data;
+			};
+			
+			document.getElementById("btn").addEventListener("click", function(){
+				client.send(document.getElementById("textbox").value);
+			});
+		},false);
+		</script>
+		
+	</head>
+	
+	<body>
+		<p>Help<br>
+		Type these<br>
+		- get<br>
+		- put [user] [pass]<br>
+		- remove [user]<br>
+		- find [user]
+		</p>
+		<input type="text" id="textbox">
+		<input type="button" value="send" id="btn">
+		<pre id="data"></pre>
+	</body>
+</html>

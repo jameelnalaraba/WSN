@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        html,body{
+            width: 98%;
+            height: 98%;
+        }
+        #cvs{
+            width:100%;
+            height:80%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.min.js"></script>
+    <script>
+        window.addEventListener("load", start, false);
+
+        function start() {
+            var ctx = document.getElementById("cvs").getContext("2d");
+            var chart = new Chart(ctx, {
+                type: 'bubble',
+                data: {
+                    datasets:
+                        [{
+                            label: "Member node",
+                            data: [
+                                {
+                                    x: 20,
+                                    y: 40,
+                                    r: 10
+                                },
+                                {
+                                    x: 60,
+                                    y: 60,
+                                    r: 10
+                                }
+                            ],
+                            backgroundColor: "rgb(0,0,255)"
+                        },
+                        {
+                            label: "Head node",
+                            data: [
+                                {
+                                    x: 30,
+                                    y: 50,
+                                    r: 30
+                                }
+                            ],
+                            backgroundColor: "rgb(255,0,0)"
+                        }
+                ]},
+                options: {
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            stepSize: 1
+                        },
+                        x: {
+                            min:0,
+                            max: 100,
+                            stepSize: 1
+                        }
+                    }
+                }
+            });
+
+            function random(a, b) {
+                return Math.round( a + Math.random()*(b-a) );
+            }
+
+            setInterval(function () {
+                chart.data.datasets[0].data.push({
+                    x: random(0,100),
+                    y: random(0,100),
+                    r: 10 
+                });
+                chart.update();
+            }, 1000);
+
+        }
+    </script>
+</head>
+<body>
+
+    <canvas id="cvs"></canvas>
+
+</body>
+</html>
